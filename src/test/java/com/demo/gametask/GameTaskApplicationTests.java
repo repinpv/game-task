@@ -1,4 +1,4 @@
-package com.task.gametask;
+package com.demo.gametask;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,5 +12,4 @@ public class GameTaskApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
-
 }

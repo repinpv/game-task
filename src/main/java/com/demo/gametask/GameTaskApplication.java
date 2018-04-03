@@ -1,4 +1,4 @@
-package com.task.gametask;
+package com.demo.gametask;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
