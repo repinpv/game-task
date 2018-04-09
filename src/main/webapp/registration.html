@@ -9,16 +9,19 @@
                             <div class="mb3">Имя</div>
                             <input class="login_input mb10" type="text" name="name" placeholder="Username"
                                    autofocus="true" value="{{ userForm.name }}"><br>
+                            {{# error-name }}
+                            <div class="c_red mt5 mb5">
+                                {{ . }}
+                            </div>
+                            {{/ error-name }}
                             <div class="mb3">Пароль</div>
                             <input class="login_input" type="password" name="password" placeholder="Password"
                                    value="{{ userForm.password }}"><br>
-                            {{# org.springframework.validation.BindingResult.userForm }}
-                            {{# errors}}
+                            {{# error-password }}
                             <div class="c_red mt5 mb5">
-                                {{ getCode }}
+                                {{ . }}
                             </div>
-                            {{/ errors}}
-                            {{/ org.springframework.validation.BindingResult.userForm }}
+                            {{/ error-password }}
                             <div class="bbtn_sm mt3 mb10">
                                 <div class="br">
                                     <input style="width: 72px" type="submit" value="Зарегестрироваться">
