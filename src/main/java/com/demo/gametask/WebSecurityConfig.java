@@ -1,60 +1,53 @@
 package com.demo.gametask;
 
-import com.demo.gametask.data.UserRepository;
-import com.demo.gametask.data.entity.UserEntity;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.BeanIds;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserRepository userRepository;
-    private final UserDetailsService userDetailsService = new UserDetailsServiceImpl();
+    private final UserDetailsService userDetailsService;
 
-    public WebSecurityConfig(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public WebSecurityConfig(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                //.antMatchers("/", "/home").permitAll()
-                .antMatchers("/login", "/error").permitAll()
+                .antMatchers("/view/**", "/registration", "/favicon.ico").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
+                .formLogin().loginPage("/login").permitAll()
                 .and()
-                .logout()
-                .permitAll();
+                .logout().permitAll();
+        http.csrf().disable();
+    }
+
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+    }
+
+    @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     @Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-        return userDetailsService;
-    }
-
-    private class UserDetailsServiceImpl implements UserDetailsService {
-
-        @Override
-        public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-            UserEntity userEntity = userRepository.findByName(name);
-            return User.withDefaultPasswordEncoder()
-                    .username(userEntity.getName())
-                    .password(userEntity.getPassword())
-                    .roles("USER")
-                    .build();
-        }
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

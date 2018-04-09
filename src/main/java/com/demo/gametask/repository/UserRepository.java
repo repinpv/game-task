@@ -1,6 +1,6 @@
-package com.demo.gametask.data;
+package com.demo.gametask.repository;
 
-import com.demo.gametask.data.entity.UserEntity;
+import com.demo.gametask.model.UserEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

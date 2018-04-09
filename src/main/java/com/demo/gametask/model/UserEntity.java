@@ -1,4 +1,4 @@
-package com.demo.gametask.data.entity;
+package com.demo.gametask.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,9 +12,9 @@ public class UserEntity {
     @Column(name ="id")
     private int id;
     @Column(name ="name")
-    private String name;
+    private String name = "";
     @Column(name ="password")
-    private String password;
+    private String password = "";
 
     public int getId() {
         return id;

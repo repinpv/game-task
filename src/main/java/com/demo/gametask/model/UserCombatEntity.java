@@ -1,4 +1,4 @@
-package com.demo.gametask.data.entity;
+package com.demo.gametask.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
