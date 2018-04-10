@@ -1,6 +1,8 @@
 package com.demo.gametask.service;
 
-import com.demo.gametask.model.UserEntity;
+import com.demo.gametask.model.entity.UserAuthEntity;
+import com.demo.gametask.model.entity.UserEntity;
+import com.demo.gametask.repository.UserAuthRepository;
 import com.demo.gametask.repository.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -20,16 +23,21 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             = Collections.singletonList(new SimpleGrantedAuthority("USER"));
 
     private final UserRepository userRepository;
+    private final UserAuthRepository userAuthRepository;
 
-    public UserDetailsServiceImpl(UserRepository userRepository) {
+    public UserDetailsServiceImpl(UserRepository userRepository, UserAuthRepository userAuthRepository) {
         this.userRepository = userRepository;
+        this.userAuthRepository = userAuthRepository;
     }
 
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity user = userRepository.findByName(username);
+        final Optional<UserEntity> userOptional = userRepository.findByUsername(username);
+        final UserEntity user = userOptional.orElseThrow(() -> new UsernameNotFoundException(username));
+        final Optional<UserAuthEntity> userAuthOptional = userAuthRepository.findById(user.getId());
 
-        return new User(user.getName(), user.getPassword(), DEFAULT_AUTHORITY);
+        //noinspection ConstantConditions
+        return new User(user.getUsername(), userAuthOptional.get().getPassword(), DEFAULT_AUTHORITY);
     }
 }

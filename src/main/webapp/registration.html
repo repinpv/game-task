@@ -1,4 +1,4 @@
-{{>panel\header}}
+{{#layout}}
 <div class="msg mrg_msg1 mt5 c_brown4">
     <div class="wr_bg">
         <div class="wr_c1">
@@ -6,22 +6,34 @@
                 <div class="wr_c3">
                     <div class="wr_c4 font_14">
                         <form action="/registration" method="POST">
+
                             <div class="mb3">Имя</div>
-                            <input class="login_input mb10" type="text" name="name" placeholder="Username"
-                                   autofocus="true" value="{{ userForm.name }}"><br>
+                            <input class="login_input mb10" type="text" name="username" placeholder="Username"
+                                   autofocus="true" value="{{ registrationForm.username }}"><br>
                             {{# error-name }}
                             <div class="c_red mt5 mb5">
                                 {{ . }}
                             </div>
                             {{/ error-name }}
+
                             <div class="mb3">Пароль</div>
                             <input class="login_input" type="password" name="password" placeholder="Password"
-                                   value="{{ userForm.password }}"><br>
+                                   value="{{ registrationForm.password }}"><br>
                             {{# error-password }}
                             <div class="c_red mt5 mb5">
                                 {{ . }}
                             </div>
                             {{/ error-password }}
+
+                            <div class="mb3">Подтверодите пароль</div>
+                            <input class="login_input" type="password" name="passwordConfirm" placeholder="Password Confirm"
+                                   ><br>
+                            {{# error-passwordConfirm }}
+                            <div class="c_red mt5 mb5">
+                                {{ . }}
+                            </div>
+                            {{/ error-passwordConfirm }}
+
                             <div class="bbtn_sm mt3 mb10">
                                 <div class="br">
                                     <input style="width: 72px" type="submit" value="Зарегестрироваться">
@@ -35,4 +47,5 @@
         </div>
     </div>
 </div>
-{{>panel\footer}}
+{{/layout}}
+{{>layout}}

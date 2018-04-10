@@ -7,8 +7,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LobbyController {
 
-    @GetMapping("/")
-    public ModelAndView index() {
-        return new ModelAndView("index");
+    @GetMapping({"/", "/lobby"})
+    public ModelAndView lobby() {
+        return new ModelAndView("lobby");
     }
 }

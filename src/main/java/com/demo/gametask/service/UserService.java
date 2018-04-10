@@ -1,10 +1,13 @@
 package com.demo.gametask.service;
 
-import com.demo.gametask.model.UserEntity;
+import com.demo.gametask.form.RegistrationForm;
+import com.demo.gametask.model.entity.UserEntity;
+
+import java.util.Optional;
 
 public interface UserService {
 
-    void save(UserEntity user);
+    void save(RegistrationForm registrationForm);
 
-    UserEntity findByName(String name);
+    Optional<UserEntity> findByName(String name);
 }

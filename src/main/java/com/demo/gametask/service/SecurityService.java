@@ -1,7 +1,9 @@
 package com.demo.gametask.service;
 
-public interface SecurityService {
-    String findLoggedInUsername();
+import com.demo.gametask.model.user.UserIdentity;
 
-    void autologin(String username, String password);
+public interface SecurityService {
+    UserIdentity getLoggedInUser();
+
+    void autoLogin(String username, String password);
 }

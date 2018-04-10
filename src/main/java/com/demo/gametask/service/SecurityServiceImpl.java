@@ -1,5 +1,6 @@
 package com.demo.gametask.service;
 
+import com.demo.gametask.model.user.UserIdentity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,19 +27,20 @@ public class SecurityServiceImpl implements SecurityService {
     }
 
     @Override
-    public String findLoggedInUsername() {
-        Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
-        if (userDetails instanceof UserDetails) {
-            return ((UserDetails)userDetails).getUsername();
+    public UserIdentity getLoggedInUser() {
+        final Object details = SecurityContextHolder.getContext().getAuthentication().getDetails();
+        if (details instanceof UserIdentity) {
+            return (UserIdentity)details;
         }
 
         return null;
     }
 
     @Override
-    public void autologin(String username, String password) {
+    public void autoLogin(String username, String password) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
+                = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
 
         authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 

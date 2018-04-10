@@ -1,11 +1,25 @@
-package com.demo.gametask.model;
+package com.demo.gametask.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity(name = "user_combat")
+@Entity
+@Table(name = "user_combat")
 public class UserCombatEntity {
+
+    private static final int INITIAL_ATTACK_DAMAGE = 10;
+    private static final int INITIAL_HEALTH_POINTS = 100;
+
+    public static UserCombatEntity create(final UserEntity user) {
+        final UserCombatEntity userCombatEntity = new UserCombatEntity();
+        userCombatEntity.setUserId(user.getId());
+        userCombatEntity.setAttackDamage(INITIAL_ATTACK_DAMAGE);
+        userCombatEntity.setHealthPoints(INITIAL_HEALTH_POINTS);
+        return userCombatEntity;
+    }
+
     @Id
     @Column(name ="user_id")
     private int userId;
