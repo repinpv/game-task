@@ -1,6 +1,5 @@
 package com.demo.gametask.form;
 
-import com.demo.gametask.model.entity.UserEntity;
 import com.demo.gametask.service.UserService;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -18,7 +17,7 @@ public class RegistrationFormValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> aClass) {
-        return UserEntity.class.equals(aClass);
+        return RegistrationForm.class.equals(aClass);
     }
 
     @Override
