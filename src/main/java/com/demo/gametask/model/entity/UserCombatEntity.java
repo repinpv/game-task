@@ -1,5 +1,7 @@
 package com.demo.gametask.model.entity;
 
+import com.demo.gametask.model.combat.PlayerCombatStats;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "user_combat")
-public class UserCombatEntity {
+public class UserCombatEntity implements PlayerCombatStats {
 
     private static final int INITIAL_ATTACK_DAMAGE = 10;
     private static final int INITIAL_HEALTH_POINTS = 100;
@@ -21,13 +23,14 @@ public class UserCombatEntity {
     }
 
     @Id
-    @Column(name ="user_id")
+    @Column(name = "user_id")
     private int userId;
-    @Column(name ="attack_damage")
+    @Column(name = "attack_damage")
     private int attackDamage;
-    @Column(name ="health_points")
+    @Column(name = "health_points")
     private int healthPoints;
 
+    @Override
     public int getUserId() {
         return userId;
     }
@@ -36,6 +39,12 @@ public class UserCombatEntity {
         this.userId = userId;
     }
 
+    @Override
+    public String getUsername() {
+        return "MUST NOT BE SHOWN";
+    }
+
+    @Override
     public int getAttackDamage() {
         return attackDamage;
     }
@@ -44,8 +53,19 @@ public class UserCombatEntity {
         this.attackDamage = attackDamage;
     }
 
+    @Override
     public int getHealthPoints() {
         return healthPoints;
+    }
+
+    @Override
+    public int getHealthPointsLeft() {
+        return healthPoints;
+    }
+
+    @Override
+    public int getHealthPointsLeftPercent() {
+        return 100;
     }
 
     public void setHealthPoints(int healthPoints) {

@@ -1,4 +1,4 @@
-{{#layout}}
+{{# layout }}
 <div class="msg mrg_msg1 mt5 c_brown4">
     <div class="wr_bg">
         <div class="wr_c1">
@@ -6,13 +6,13 @@
                 <div class="wr_c3">
                     <div class="wr_c4 font_14">
                         <form action="/login" method="POST">
-                            <span>{{message}}</span>
+                            <span>{{ message }}</span>
                             <div class="mb3">Имя</div>
                             <input class="login_input mb10" type="text" name="username" placeholder="Username"
                                    autofocus="true"><br>
                             <div class="mb3">Пароль</div>
                             <input class="login_input" type="password" name="password" placeholder="Password"><br>
-                            <span>{{error}}</span>
+                            <span>{{ error }}</span>
                             <div class="c_red mt5 mb5">
                             </div>
                             <div class="bbtn_sm mt3 mb10">
@@ -28,5 +28,5 @@
         </div>
     </div>
 </div>
-{{/layout}}
-{{>layout}}
+{{/ layout }}
+{{> layout }}

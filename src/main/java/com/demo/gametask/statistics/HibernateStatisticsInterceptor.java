@@ -1,5 +1,6 @@
-package com.demo.gametask.statistic;
+package com.demo.gametask.statistics;
 
+import com.demo.gametask.utils.TimeUtils;
 import org.hibernate.EmptyInterceptor;
 import org.hibernate.Transaction;
 import org.slf4j.Logger;
@@ -13,17 +14,14 @@ public class HibernateStatisticsInterceptor extends EmptyInterceptor {
     private ThreadLocal<Long> beginTimeHolder = new ThreadLocal<>();
     private ThreadLocal<Long> timeHolder = new ThreadLocal<>();
 
-    public void initCounters() {
-        queryCount.set(0);
-        timeHolder.set(0L);
-    }
-
     public Integer getQueryCount() {
-        return queryCount.get();
+        final Integer count = queryCount.get();
+        return count == null ? 0 : count;
     }
 
     public Long getTransactionTime() {
-        return timeHolder.get();
+        final Long time = timeHolder.get();
+        return time == null ? 0 : time;
     }
 
     public void clearCounters() {
@@ -34,21 +32,22 @@ public class HibernateStatisticsInterceptor extends EmptyInterceptor {
     @Override
     public String onPrepareStatement(String sql) {
         Integer count = queryCount.get();
-        if (count != null) {
-            queryCount.set(count + 1);
+        if (count == null) {
+            count = 0;
         }
-        //log.info(sql);
+        queryCount.set(count + 1);
+
         return sql;
     }
 
     @Override
     public void afterTransactionBegin(Transaction tx) {
-        beginTimeHolder.set(System.currentTimeMillis());
+        beginTimeHolder.set(TimeUtils.getCurrentTime());
     }
 
     @Override
     public void afterTransactionCompletion(Transaction tx) {
-        final long currentTimeMillis = System.currentTimeMillis();
+        final long currentTime = TimeUtils.getCurrentTime();
 
         final Long beginTime = beginTimeHolder.get();
         if (beginTime == null) {
@@ -58,7 +57,7 @@ public class HibernateStatisticsInterceptor extends EmptyInterceptor {
             if (time == null) {
                 log.error("Incorrect hibernate transaction time calcs");
             } else {
-                timeHolder.set(time + currentTimeMillis - beginTime);
+                timeHolder.set(time + currentTime - beginTime);
             }
         }
 

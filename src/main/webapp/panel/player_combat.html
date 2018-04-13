@@ -1,0 +1,39 @@
+<div class="hdr">
+    <span class="stat">
+        <img class="price_img" src="/view/image/expirience.png" alt=""/>{{ player.getAttackDamage }}
+    </span>
+    <span class="stat">
+        <img class="price_img" src="/view/image/heart.png" alt=""/>{{ player.getHealthPoints }}
+    </span>
+</div>
+
+<div class="top_right_cont">
+</div>
+
+<div class="rplate">
+    <div class="rp_r">
+        <div class="rp_c">
+            <div class="wr">
+                <table class="small h24 bold">
+                    <tr>
+                        <td class="vm plr5 c_brown3 nwr pt2">
+                            <img class="vm mb3" src="/view/image/heart.png" height="16" width="16" alt=""/>
+                        </td>
+                        <td class="vm w100">
+                            <div class="prg">
+                                <div class="end">
+                                    <div class="rate" style="width:{{ player.getHealthPointsLeftPercent }}%;">
+                                        <div class="rr">
+                                            <div class="rl"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="vm plr5 c_brown3">{{ player.getHealthPointsLeft }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

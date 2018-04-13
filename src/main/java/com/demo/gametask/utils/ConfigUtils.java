@@ -2,13 +2,18 @@ package com.demo.gametask.utils;
 
 import com.demo.gametask.model.config.BossConfig;
 import com.demo.gametask.model.config.BossRaidConfig;
+import com.demo.gametask.model.config.PlayerConfig;
 
 public class ConfigUtils {
 
+    public static final PlayerConfig PLAYER_CONFIG;
     public static final BossConfig BOSS_CONFIG;
     public static final BossRaidConfig BOSS_RAID_CONFIG;
 
     static {
+        PLAYER_CONFIG = new PlayerConfig();
+        PLAYER_CONFIG.setAttackInterval(5000);
+
         BOSS_CONFIG = new BossConfig();
         BOSS_CONFIG.setId(1);
         BOSS_CONFIG.setName("Hell Cat");

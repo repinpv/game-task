@@ -2,6 +2,7 @@ package com.demo.gametask.service;
 
 import com.demo.gametask.model.entity.UserAuthEntity;
 import com.demo.gametask.model.entity.UserEntity;
+import com.demo.gametask.model.user.UserDetailsImpl;
 import com.demo.gametask.repository.UserAuthRepository;
 import com.demo.gametask.repository.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -38,6 +39,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         final Optional<UserAuthEntity> userAuthOptional = userAuthRepository.findById(user.getId());
 
         //noinspection ConstantConditions
-        return new User(user.getUsername(), userAuthOptional.get().getPassword(), DEFAULT_AUTHORITY);
+        return new UserDetailsImpl(user, userAuthOptional.get().getPassword(), DEFAULT_AUTHORITY);
     }
 }

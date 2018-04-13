@@ -15,7 +15,7 @@
 
     <div class="content">
         <div class="start">
-            {{{layout.body}}}
+            {{{ layout.body }}}
         </div>
     </div>
 </div>
@@ -25,13 +25,19 @@
 			</span>
 </div>
 
-<div class="small mt20 mb20 c_lbrown cntr td_un">
+<div class="small mt20 mb20 c_lbrown cntr">
+
+    <div class="mt10 mb10">
+        <a href="/logout">Выход</a>
+    </div>
 
     <div class="mt5 mb5">
         <span>Онлайн: 2919</span><br>
-        page {{ _processTime}} ms, db: {{ _queryCount }}req, ({{ _queryTime }}ms)<br>
     </div>
 
+    <div class="mt5 mb5">
+        page {{ _processTime}} ms, db: {{ _queryCount }}req, ({{ _queryTime }}ms)
+    </div>
 </div>
 
 <div class="ovh">

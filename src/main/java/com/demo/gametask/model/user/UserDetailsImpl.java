@@ -9,12 +9,11 @@ public class UserDetailsImpl extends User implements UserIdentity {
 
     private final int id;
 
-    public UserDetailsImpl(int id,
-                           String username,
+    public UserDetailsImpl(UserIdentity userIdentity,
                            String password,
                            Collection<? extends GrantedAuthority> authorities) {
-        super(username, password, authorities);
-        this.id = id;
+        super(userIdentity.getUsername(), password, authorities);
+        this.id = userIdentity.getId();
     }
 
     @Override

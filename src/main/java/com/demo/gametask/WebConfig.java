@@ -1,9 +1,7 @@
 package com.demo.gametask;
 
-import com.demo.gametask.statistic.HibernateStatisticsInterceptor;
-import com.demo.gametask.statistic.RequestStatisticsInterceptor;
+import com.demo.gametask.statistics.RequestStatisticsInterceptor;
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;

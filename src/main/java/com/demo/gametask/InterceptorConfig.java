@@ -1,7 +1,7 @@
 package com.demo.gametask;
 
-import com.demo.gametask.statistic.HibernateStatisticsInterceptor;
-import com.demo.gametask.statistic.RequestStatisticsInterceptor;
+import com.demo.gametask.statistics.HibernateStatisticsInterceptor;
+import com.demo.gametask.statistics.RequestStatisticsInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,12 +9,12 @@ import org.springframework.context.annotation.Configuration;
 public class InterceptorConfig {
 
     @Bean
-    public RequestStatisticsInterceptor requestStatisticsInterceptor() {
+    public static RequestStatisticsInterceptor requestStatisticsInterceptor() {
         return new RequestStatisticsInterceptor();
     }
 
     @Bean
-    public HibernateStatisticsInterceptor hibernateInterceptor() {
+    public static HibernateStatisticsInterceptor hibernateInterceptor() {
         return new HibernateStatisticsInterceptor();
     }
 }

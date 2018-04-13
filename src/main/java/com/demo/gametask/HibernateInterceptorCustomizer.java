@@ -1,6 +1,6 @@
 package com.demo.gametask;
 
-import com.demo.gametask.statistic.HibernateStatisticsInterceptor;
+import com.demo.gametask.statistics.HibernateStatisticsInterceptor;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
 import org.springframework.stereotype.Component;
 
