@@ -53,12 +53,7 @@ public class HibernateStatisticsInterceptor extends EmptyInterceptor {
         if (beginTime == null) {
             log.error("Incorrect hibernate transaction begin time calcs");
         } else {
-            final Long time = timeHolder.get();
-            if (time == null) {
-                log.error("Incorrect hibernate transaction time calcs");
-            } else {
-                timeHolder.set(time + currentTime - beginTime);
-            }
+            timeHolder.set(getTransactionTime() + currentTime - beginTime);
         }
 
         beginTimeHolder.remove();

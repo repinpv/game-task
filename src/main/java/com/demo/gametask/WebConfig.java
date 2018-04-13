@@ -30,4 +30,13 @@ public class WebConfig implements WebMvcConfigurer {
         validator.setValidationMessageSource(messageSource);
         return validator;
     }
+
+    /*@Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry
+                .addResourceHandler(
+                        "/src/main/resources/**",
+                        "/src/main/resources/templates/**",
+                        "/src/main/resources/static/**");
+    }*/
 }
